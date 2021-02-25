@@ -1,0 +1,28 @@
+
+
+.search_results_box {
+  max-height: 50vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 5px;
+  
+
+}
+.search_results_single {
+  border-radius: 5px;
+  border-bottom: solid black;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  text-align: left;
+  margin: 2px 0;
+  padding: 5px;
+}
+
+.search_results_title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.search_results_snippet {
+  margin: 2px 1px;
+}

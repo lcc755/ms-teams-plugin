@@ -1,7 +1,7 @@
 import React from 'react';
 import './MainForm.css'
 import * as microsoftTeams from "@microsoft/teams-js";
-
+import SearchResults from "./SearchResults";
 
 class MainForm extends React.Component {
 	constructor(props) {
@@ -10,7 +10,8 @@ class MainForm extends React.Component {
 			value: '',
 			TypedValues:"",
 			searching: false,
-			valid: true
+			valid: true, 
+			results: ""
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.getValidationState = this.getValidationState.bind(this);
@@ -84,9 +85,10 @@ class MainForm extends React.Component {
 						disabled={!this.state.valid}/>
 				</div>
 
+
 				{ this.state.searching ? 
   				<div className="search_results">
-        			You Searched for <b>{this.state.searchedValue}</b> and should now redirect..
+					<SearchResults value = {this.state.searchedValue}/>
     			</div>
     			: null }
 			</div>
