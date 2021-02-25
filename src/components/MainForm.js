@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './MainForm.css'
 import * as microsoftTeams from "@microsoft/teams-js";
 
 
@@ -8,6 +8,8 @@ class MainForm extends React.Component {
 		super(props);
 		this.state = {
 			value: '',
+			TypedValues:"",
+			searching: false,
 			valid: true
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -28,7 +30,9 @@ class MainForm extends React.Component {
   }
   
 	handleChange(e) {
-		this.setState({value: e.target.value, valid: (this.getValidationState() === 'success')})
+		this.setState({
+			TypedValues: e.target.value
+		})
 	}
 
 	getValidationState() {
@@ -37,42 +41,55 @@ class MainForm extends React.Component {
 	    return (this.state.value.match(/((http|https):\/\/www\.)?.+\..+/) ) ? 'success' : 'error';
   	}
 
+	searchForTutorials = async (e) => {
+		if (e.key == "Enter") {
+			this.handleSearch();
+		}
+	}
+
   	handleSubmit(e) {
-  		e.preventDefault();
-  		console.log(this.state.value);
+		/*e.preventDefault()*/
+		this.handleSearch();
   	}
 
+	handleSearch = async () => {
+		if (this.state.TypedValues) {
+			this.setState({
+				searching: true,
+				searchedValue: this.state.TypedValues
+			});
+		}
+	}
+
+
 	render() {
-		return (
-			// <div className="MainForm">
-			// 	<div className="Instructions">
-			// 		<h2><Form.Label>Input the website you'd like to crawl</Form.Label></h2>
-			// 	</div>
-			// 	<div className="Input">
-			// 		<form onSubmit={this.handleSubmit}>
-			// 			<FormGroup bsSize="large" validationState={this.getValidationState()}>
-			// 				<FormControl 
-			// 					type="text"
-			// 					value={this.state.value}
-			// 					placeholder="e.g. google.com"
-			// 					onChange={this.handleChange} />
-			// 				<FormControl.Feedback />
-								
-			// 			</FormGroup>
-			// 			<Button bsSize="large" bsStyle="primary" type="submit" onClick={this.handleSubmit} disabled={!this.state.valid}>
-			// 				Crawl!
-			// 			</Button>
-			// 		</form>
-			// 	</div>
-            // </div>
-            
-            <div class="login-box">
-                <h1>Creatros Crawler</h1>
-                <div class="textbox">
-                    <input type="text" placeholder="Type tutorial to crawl"name=""  validationState={this.getValidationState()} />
-                </div>
-                <input class="btn" type="button" name="" value="Crawl" onClick={this.handleSubmit} disabled={!this.state.valid}/>
-        </div>
+		return (      
+			<div className="main_form">
+				<div className="search_box">
+					<h1>Creatros Crawler</h1>
+					<div class="search_box_input">
+						<input 
+							type="text"
+							placeholder="Type tutorial to crawl"
+							validationState={this.getValidationState()} 
+							onKeyUp={this.searchForTutorials}
+							onChange={this.handleChange}
+						/>
+					</div>
+					<input 
+						className="search_button" 
+						type="button"
+						value="Crawl" 
+						onClick={this.handleSubmit} 
+						disabled={!this.state.valid}/>
+				</div>
+
+				{ this.state.searching ? 
+  				<div className="search_results">
+        			You Searched for <b>{this.state.searchedValue}</b> and should now redirect..
+    			</div>
+    			: null }
+			</div>
             )
 	}
 }
