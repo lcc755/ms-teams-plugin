@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <Route exact path="/config" component={TabConfig} />
-      <Route exact path="/" component={MainForm} />
+      <Route exact path="/tab" component={MainForm} />
     </Router>
   );
 }
