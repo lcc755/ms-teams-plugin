@@ -6,14 +6,18 @@
   position: absolute;
   top: 45%;
   left:50%;
-  padding: 50px 5px;
+  padding: 20px 5px;
   transform: translate(-50%, -50%);
   border: 3px solid  rgb(49, 49, 49);
   border-radius: 20px;
   background-color: rgba(49, 49, 49, 1);
-  text-align: center;
+  
 }
 
+.search_box {
+  padding: 20px 0;
+  text-align: center;
+}
 
 .search_box h1{
   float: center;
@@ -53,7 +57,21 @@
 }
 
 .search_results {
-  padding-top: 10px;
+  /*padding-top: 10px;*/
   font-size: small;
   padding: 1vw;
+  text-align: center;
+}
+
+.back_button {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  margin-left: 12px;
+}
+.back_button:hover{
+  cursor:pointer;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bolder;
 }

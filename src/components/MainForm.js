@@ -62,10 +62,35 @@ class MainForm extends React.Component {
 		}
 	}
 
+	exitResults = async () =>  {
+		
+		if (this.state.searching) {
+			console.log("exit");
+				this.setState({
+				searching: false
+			});
+		}
+	}
+
 
 	render() {
 		return (      
 			<div className="main_form">
+			
+				{ this.state.searching ? 
+				<div>
+					<input
+						className="back_button" 
+						type="button"
+						value="< Back To Search" 
+						onClick={this.exitResults} 
+						disabled={!this.state.valid}
+					/>
+					<div className="search_results">
+						<SearchResults value = {this.state.searchedValue}/>
+					</div>
+				</div>
+				:
 				<div className="search_box">
 					<h1>Creatros Crawler</h1>
 					<div class="search_box_input">
@@ -84,13 +109,8 @@ class MainForm extends React.Component {
 						onClick={this.handleSubmit} 
 						disabled={!this.state.valid}/>
 				</div>
-
-
-				{ this.state.searching ? 
-  				<div className="search_results">
-					<SearchResults value = {this.state.searchedValue}/>
-    			</div>
-    			: null }
+			
+			}
 			</div>
             )
 	}

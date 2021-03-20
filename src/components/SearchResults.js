@@ -25,7 +25,6 @@ class SearchResults extends React.Component {
 		});
         
     let results = await this.SearchWeb();
-
 		this.setState({
 			results: results,
       loading: false
@@ -43,13 +42,15 @@ class SearchResults extends React.Component {
 		}
 	
     const items = res.data.items;
-    console.log(items.length);
+    let results;
+    if (items) {
+      results = []
+      for (var i=0; i<items.length; i++) {
+        let temp = SingleResult(items[i]);
+			  results.push(temp);
+		  }
+    }
 
-    let results = [];
-    for (var i=0; i<items.length; i++) {
-      let temp = SingleResult(items[i]);
-			results.push(temp);
-		}
     return results;
   }
 
@@ -65,13 +66,15 @@ class SearchResults extends React.Component {
 		return response;
 	}
 
-
-
     render() {
       return (
         <div className="search_results_box">
           {this.state.loading ? "Loading.." : null}
-          {this.state.results ? this.state.results : null}
+          {this.state.results ? this.state.results : 
+            <div className="search_no_results">
+              No Results
+            </div>
+          }
         </div>
       );
     }
